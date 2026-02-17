@@ -1,0 +1,17 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="SystemEmail" />
+<f:section name="Subject">Ihr Download-Link</f:section>
+<f:section name="Title">Ihr Download ist bereit</f:section>
+<f:section name="Main">
+<p>Hallo,</p>
+<p>vielen Dank für Ihr Interesse! Klicken Sie auf den folgenden Link, um Ihre Datei herunterzuladen:</p>
+<p style="margin: 24px 0;">
+    <a href="{downloadLink}"
+       style="background-color: #013859; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold;">
+        Jetzt herunterladen
+    </a>
+</p>
+<p><small>Oder kopieren Sie diesen Link: <a href="{downloadLink}">{downloadLink}</a></small></p>
+<p><small>Dieser Link ist 72 Stunden gültig.</small></p>
+</f:section>
+</html>

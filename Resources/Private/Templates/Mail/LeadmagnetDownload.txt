@@ -1,0 +1,14 @@
+<f:layout name="SystemEmail" />
+<f:section name="Subject">Ihr Download-Link</f:section>
+<f:section name="Title">Ihr Download ist bereit</f:section>
+<f:section name="Main">
+Hallo,
+
+vielen Dank für Ihr Interesse!
+
+Klicken Sie auf den folgenden Link, um Ihre Datei herunterzuladen:
+
+{downloadLink}
+
+Dieser Link ist 72 Stunden gültig.
+</f:section>

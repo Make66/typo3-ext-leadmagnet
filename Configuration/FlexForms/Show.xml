@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<T3DataStructure>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <sheetTitle>LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:flexform.sheetTitle</sheetTitle>
+                <type>array</type>
+                <el>
+                    <settings.buttonTitle>
+                        <label>LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:flexform.buttonTitle</label>
+                        <config>
+                            <type>input</type>
+                            <size>30</size>
+                            <default>Download</default>
+                        </config>
+                    </settings.buttonTitle>
+                    <settings.buttonColor>
+                        <label>LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:flexform.buttonColor</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>Primary</label>
+                                    <value>primary</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>Secondary</label>
+                                    <value>secondary</value>
+                                </numIndex>
+                                <numIndex index="2">
+                                    <label>Success</label>
+                                    <value>success</value>
+                                </numIndex>
+                                <numIndex index="3">
+                                    <label>Info</label>
+                                    <value>info</value>
+                                </numIndex>
+                                <numIndex index="4">
+                                    <label>Warning</label>
+                                    <value>warning</value>
+                                </numIndex>
+                                <numIndex index="5">
+                                    <label>Danger</label>
+                                    <value>danger</value>
+                                </numIndex>
+                                <numIndex index="6">
+                                    <label>Dark</label>
+                                    <value>dark</value>
+                                </numIndex>
+                            </items>
+                            <default>primary</default>
+                        </config>
+                    </settings.buttonColor>
+                    <settings.downloadFile>
+                        <label>LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:flexform.downloadFile</label>
+                        <config>
+                            <type>file</type>
+                            <maxitems>1</maxitems>
+                            <allowed>common-media-types</allowed>
+                        </config>
+                    </settings.downloadFile>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>

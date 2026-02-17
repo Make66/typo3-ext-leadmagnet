@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file datatype="plaintext" original="locallang.xlf" source-language="en" target-language="de" date="2026-02-17T00:00:00+00:00" product-name="taketool/leadmagnet">
+		<header/>
+		<body>
+			<trans-unit id="plugin.title">
+				<source>Lead Magnet</source>
+				<target>Lead Magnet</target>
+			</trans-unit>
+			<trans-unit id="plugin.description">
+				<source>Download teaser with email gate and automatic email delivery</source>
+				<target>Download-Teaser mit E-Mail-Abfrage und automatischem E-Mail-Versand</target>
+			</trans-unit>
+			<trans-unit id="bodytext">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="flexform.sheetTitle">
+				<source>Lead Magnet Settings</source>
+				<target>Lead Magnet Einstellungen</target>
+			</trans-unit>
+			<trans-unit id="flexform.buttonTitle">
+				<source>Button Title</source>
+				<target>Buttontext</target>
+			</trans-unit>
+			<trans-unit id="flexform.buttonColor">
+				<source>Button Color</source>
+				<target>Buttonfarbe</target>
+			</trans-unit>
+			<trans-unit id="flexform.downloadFile">
+				<source>Download File</source>
+				<target>Download-Datei</target>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead">
+				<source>Lead</source>
+				<target>Lead</target>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.email">
+				<source>Email</source>
+				<target>E-Mail</target>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.token">
+				<source>Token</source>
+				<target>Token</target>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.content_element">
+				<source>Content Element</source>
+				<target>Inhaltselement</target>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.downloaded">
+				<source>Downloaded</source>
+				<target>Heruntergeladen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file datatype="plaintext" original="locallang.xlf" source-language="en" date="2026-02-17T00:00:00+00:00" product-name="taketool/leadmagnet">
+		<header/>
+		<body>
+			<trans-unit id="plugin.title">
+				<source>Lead Magnet</source>
+			</trans-unit>
+			<trans-unit id="plugin.description">
+				<source>Download teaser with email gate and automatic email delivery</source>
+			</trans-unit>
+			<trans-unit id="bodytext">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="flexform.sheetTitle">
+				<source>Lead Magnet Settings</source>
+			</trans-unit>
+			<trans-unit id="flexform.buttonTitle">
+				<source>Button Title</source>
+			</trans-unit>
+			<trans-unit id="flexform.buttonColor">
+				<source>Button Color</source>
+			</trans-unit>
+			<trans-unit id="flexform.downloadFile">
+				<source>Download File</source>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead">
+				<source>Lead</source>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.token">
+				<source>Token</source>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.content_element">
+				<source>Content Element</source>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.downloaded">
+				<source>Downloaded</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

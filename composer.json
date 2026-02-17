@@ -1,0 +1,34 @@
+{
+    "name": "taketool/leadmagnet",
+    "description": "Lead Magnet — download teaser with email gate and automatic email delivery",
+    "type": "typo3-cms-extension",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Martin Keller",
+            "email": "martin.keller@taketool.de"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^13.4",
+        "typo3/cms-extbase": "^13.4",
+        "typo3/cms-fluid": "^13.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Taketool\\Leadmagnet\\": "Classes/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "leadmagnet"
+        }
+    }
+}
