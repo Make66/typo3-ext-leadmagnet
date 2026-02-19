@@ -130,10 +130,11 @@ class LeadmagnetController extends ActionController
                 ]);
             GeneralUtility::makeInstance(MailerInterface::class)->send($fluidEmail);
         } catch (\Exception $e) {
+            error_log('Leadmagnet mail error [' . get_class($e) . ']: ' . $e->getMessage());
             return new JsonResponse([
                 'success' => false,
                 'code' => 'mail_failed',
-                'message' => 'E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es erneut.',
+                'message' => $e->getMessage(), // temporary: expose error for debugging
             ]);
         }
 
