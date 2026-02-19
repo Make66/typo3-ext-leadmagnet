@@ -11,6 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
         var errorTitle = el.querySelector('.leadmagnet-error-title');
         var errorText = el.querySelector('.leadmagnet-error-text');
         var emailInput = el.querySelector('input[name="email"]');
+        var newsletterCheckbox = el.querySelector('input[name="newsletter"]');
+        var submitBtn = el.querySelector('button[type="submit"]');
+
+        // Enable submit button only when newsletter checkbox is checked
+        if (newsletterCheckbox && submitBtn) {
+            newsletterCheckbox.addEventListener('change', function () {
+                submitBtn.disabled = !newsletterCheckbox.checked;
+            });
+        }
 
         // Store original button classes for restoring
         var btnClasses = toggleBtn.className;
