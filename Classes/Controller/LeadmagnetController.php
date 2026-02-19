@@ -10,13 +10,16 @@ use Taketool\Leadmagnet\Domain\Model\Lead;
 use Taketool\Leadmagnet\Domain\Repository\LeadRepository;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\JsonResponse;
+use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Http\Response;
+use TYPO3\CMS\Core\Http\Stream;
 use TYPO3\CMS\Core\Mail\FluidEmail;
 use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class LeadmagnetController extends ActionController
 {
@@ -42,6 +45,7 @@ class LeadmagnetController extends ActionController
         $arguments = $this->request->getArguments();
         $email = trim((string)($arguments['email'] ?? ''));
         $contentElementUid = (int)($arguments['contentElementUid'] ?? 0);
+        $newsletter = (bool)($arguments['newsletter'] ?? false);
 
         // Honeypot check
         $sweets = (string)($arguments['sweets'] ?? '');
@@ -81,6 +85,11 @@ class LeadmagnetController extends ActionController
             ]);
         }
 
+        // Check for duplicate
+        if ($this->leadRepository->existsByEmailAndContentElement($email, $contentElementUid)) {
+            return new JsonResponse(['success' => true, 'code' => 'already_registered']);
+        }
+
         // Generate token
         $token = bin2hex(random_bytes(32));
 
@@ -89,15 +98,18 @@ class LeadmagnetController extends ActionController
         $lead->setEmail($email);
         $lead->setToken($token);
         $lead->setContentElement($contentElementUid);
+        $lead->setNewsletter($newsletter);
         $lead->setCrdate(time());
         $lead->setPid((int)$ttContentRow['pid']);
         $this->leadRepository->add($lead);
         $this->persistenceManager->persistAll();
 
         // Build download link
-        $downloadTypeNum = (int)($this->settings['downloadTypeNum'] ?? 1730287466);
-        $baseUrl = $this->request->getAttribute('normalizedParams')->getSiteUrl();
-        $downloadLink = $baseUrl . '?type=' . $downloadTypeNum . '&tx_leadmagnet_show[token]=' . $token;
+        $downloadLink = $this->uriBuilder
+            ->reset()
+            ->setTargetPageUid((int)$ttContentRow['pid'])
+            ->setCreateAbsoluteUri(true)
+            ->uriFor('download', ['token' => $token], 'Leadmagnet', 'Leadmagnet', 'Show');
 
         // Send email
         try {
@@ -106,7 +118,7 @@ class LeadmagnetController extends ActionController
                 ->setRequest($this->request)
                 ->to(new Address($email))
                 ->from(new Address(
-                    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] ?? 'noreply@example.com',
+                    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] ?: 'noreply@example.com',
                     $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] ?? ''
                 ))
                 ->subject($this->settings['emailSubject'] ?? 'Ihr Download-Link')
@@ -134,21 +146,21 @@ class LeadmagnetController extends ActionController
         $token = (string)($arguments['token'] ?? '');
 
         if ($token === '') {
-            return $this->htmlResponse('<h1>Ungültiger Link</h1><p>Der Download-Link ist ungültig.</p>');
+            return $this->downloadError('download.error.invalid_token');
         }
 
         /** @var Lead|null $lead */
         $lead = $this->leadRepository->findByToken($token);
 
         if ($lead === null) {
-            return $this->htmlResponse('<h1>Ungültiger Link</h1><p>Der Download-Link ist ungültig.</p>');
+            return $this->downloadError('download.error.invalid_token');
         }
 
         // Check token expiry (default 72 hours)
         $expiryHours = (int)($this->settings['tokenExpiryHours'] ?? 72);
         $expiryTime = $lead->getCrdate() + ($expiryHours * 3600);
         if (time() > $expiryTime) {
-            return $this->htmlResponse('<h1>Link abgelaufen</h1><p>Der Download-Link ist abgelaufen. Bitte fordern Sie einen neuen an.</p>');
+            return $this->downloadError('download.error.expired');
         }
 
         // Get file reference from FlexForm downloadFile field
@@ -168,7 +180,7 @@ class LeadmagnetController extends ActionController
             ->fetchAssociative();
 
         if (!$fileReferences) {
-            return $this->htmlResponse('<h1>Datei nicht gefunden</h1><p>Die Datei konnte nicht gefunden werden.</p>');
+            return $this->downloadError('download.error.file_not_found');
         }
 
         $fileReference = $this->resourceFactory->getFileReferenceObject($fileReferences['uid']);
@@ -179,15 +191,27 @@ class LeadmagnetController extends ActionController
         $this->leadRepository->update($lead);
         $this->persistenceManager->persistAll();
 
-        // Stream the file
-        return new Response(
+        // Stream file directly, bypassing page rendering
+        $stream = new Stream('php://temp', 'wb+');
+        $stream->write($file->getContents());
+        $stream->rewind();
+
+        $response = new Response(
+            $stream,
             200,
             [
                 'Content-Type' => $file->getMimeType(),
                 'Content-Disposition' => 'attachment; filename="' . $file->getName() . '"',
                 'Content-Length' => (string)$file->getSize(),
-            ],
-            $file->getContents()
+            ]
         );
+
+        throw new PropagateResponseException($response, 1);
+    }
+
+    private function downloadError(string $key): ResponseInterface
+    {
+        $message = LocalizationUtility::translate($key, 'Leadmagnet') ?? $key;
+        return $this->htmlResponse('<p class="alert alert-warning">' . htmlspecialchars($message) . '</p>');
     }
 }

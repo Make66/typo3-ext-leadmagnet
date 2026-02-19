@@ -20,32 +20,10 @@ leadmagnetSubmit {
     }
 }
 
-# Lead Magnet download endpoint
-leadmagnetDownload = PAGE
-leadmagnetDownload {
-    typeNum = 1730287466
-    config {
-        disableAllHeaderCode = 1
-        no_cache = 1
-        admPanel = 0
-        debug = 0
-    }
-    10 = USER
-    10 {
-        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-        extensionName = Leadmagnet
-        pluginName = Show
-        vendorName = Taketool
-        controller = Leadmagnet
-        action = download
-    }
-}
-
 # Settings for lead magnet plugin
 plugin.tx_leadmagnet_show {
     settings {
         typeNum = 1730287465
-        downloadTypeNum = 1730287466
         tokenExpiryHours = 72
         emailSubject = Ihr Download-Link
     }

@@ -39,6 +39,63 @@
 			<trans-unit id="tx_leadmagnet_lead.downloaded">
 				<source>Downloaded</source>
 			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.crdate">
+				<source>Created</source>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.newsletter">
+				<source>Newsletter</source>
+			</trans-unit>
+			<trans-unit id="form.email">
+				<source>Email address</source>
+			</trans-unit>
+			<trans-unit id="form.email.invalid">
+				<source>Please enter a valid email address.</source>
+			</trans-unit>
+			<trans-unit id="form.newsletter">
+				<source>Newsletter registration</source>
+			</trans-unit>
+			<trans-unit id="form.consent">
+				<source>By providing my email address I agree to receive emails from Coach-2-Coach.de.</source>
+			</trans-unit>
+			<trans-unit id="form.submit">
+				<source>Download now</source>
+			</trans-unit>
+			<trans-unit id="form.sending">
+				<source>Sending email...</source>
+			</trans-unit>
+			<trans-unit id="form.loading">
+				<source>Loading...</source>
+			</trans-unit>
+			<trans-unit id="form.success">
+				<source>Thank you! You will receive an email with your download link shortly.</source>
+			</trans-unit>
+			<trans-unit id="form.already_registered">
+				<source>This email address is already registered. Please check your inbox.</source>
+			</trans-unit>
+			<trans-unit id="form.error">
+				<source>Error</source>
+			</trans-unit>
+			<trans-unit id="form.error.invalid_email">
+				<source>Please check your email address and try again.</source>
+			</trans-unit>
+			<trans-unit id="form.error.mail_failed">
+				<source>The email could not be sent. Please try again in a few minutes.</source>
+			</trans-unit>
+			<trans-unit id="form.error.network">
+				<source>The server could not be reached. Please check your internet connection and try again.</source>
+			</trans-unit>
+			<trans-unit id="form.error.unknown">
+				<source>An unexpected error occurred. Please try again later.</source>
+			</trans-unit>
+			<trans-unit id="download.error.invalid_token">
+				<source>The download link is invalid.</source>
+			</trans-unit>
+			<trans-unit id="download.error.expired">
+				<source>The download link has expired. Please request a new one by submitting the form again.</source>
+			</trans-unit>
+			<trans-unit id="download.error.file_not_found">
+				<source>The file could not be found.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

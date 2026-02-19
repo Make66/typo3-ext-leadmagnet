@@ -8,41 +8,25 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 // Register the plugin as content element
-ExtensionUtility::registerPlugin(
+$pluginKey = ExtensionUtility::registerPlugin(
     'Leadmagnet',
     'Show',
     'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:plugin.title',
     'leadmagnet-show',
-    'plugins',
+    'taketool',
     'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:plugin.description',
 );
 
-// Add FlexForm
-$GLOBALS['TCA']['tt_content']['types']['leadmagnet_show']['showitem'] = '
-    --div--;LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.type,
-        CType,
-    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.general,
-        header;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_formlabel,
-        bodytext;LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:bodytext,
-        pi_flexform,
-    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,
-        --palette--;;frames,
-    --div--;LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.access,
-        --palette--;;hidden,
-        --palette--;;access,
-';
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    'bodytext;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext_formlabel,--div--;Configuration,pi_flexform,',
+    $pluginKey,
+    'after:subheader'
+);
 
+$GLOBALS['TCA']['tt_content']['types'][$pluginKey]['columnsOverrides']['bodytext']['config']['enableRichtext'] = true;
 ExtensionManagementUtility::addPiFlexFormValue(
     '*',
     'FILE:EXT:leadmagnet/Configuration/FlexForms/Show.xml',
     'leadmagnet_show',
 );
-
-// Enable richtext for bodytext in this CType
-$GLOBALS['TCA']['tt_content']['types']['leadmagnet_show']['columnsOverrides'] = [
-    'bodytext' => [
-        'config' => [
-            'enableRichtext' => true,
-        ],
-    ],
-];

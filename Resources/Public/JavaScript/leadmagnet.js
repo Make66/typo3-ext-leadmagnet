@@ -54,9 +54,13 @@ document.addEventListener('DOMContentLoaded', function () {
             form.style.display = 'none';
             spinner.style.display = 'block';
 
+            var newsletterInput = form.querySelector('input[name="newsletter"]');
             var formData = new FormData();
+            formData.append('tx_leadmagnet_show[controller]', 'Leadmagnet');
+            formData.append('tx_leadmagnet_show[action]', 'submit');
             formData.append('tx_leadmagnet_show[email]', emailInput.value);
             formData.append('tx_leadmagnet_show[contentElementUid]', uid);
+            formData.append('tx_leadmagnet_show[newsletter]', newsletterInput && newsletterInput.checked ? '1' : '0');
 
             fetch(window.location.pathname + '?type=' + typeNum, {
                 method: 'POST',
@@ -71,42 +75,31 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(function (data) {
                 spinner.style.display = 'none';
                 if (data.success) {
+                    successMsg.textContent = data.code === 'already_registered'
+                        ? el.dataset.msgAlreadyRegistered
+                        : el.dataset.msgSuccess;
                     successMsg.style.display = 'block';
                 } else {
-                    showError(data.code || 'unknown', data.message);
+                    showError(data.code || 'unknown');
                     form.style.display = 'block';
                 }
             })
-            .catch(function (err) {
+            .catch(function () {
                 spinner.style.display = 'none';
-                showError('network', null, err);
+                showError('network');
                 form.style.display = 'block';
             });
         });
 
-        function showError(code, message, err) {
-            var messages = {
-                'invalid_email': {
-                    title: 'Ungültige E-Mail',
-                    text: 'Bitte überprüfen Sie Ihre E-Mail-Adresse und versuchen Sie es erneut.'
-                },
-                'mail_failed': {
-                    title: 'E-Mail-Versand fehlgeschlagen',
-                    text: 'Die E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es in einigen Minuten erneut.'
-                },
-                'network': {
-                    title: 'Verbindungsfehler',
-                    text: 'Der Server konnte nicht erreicht werden. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.'
-                },
-                'unknown': {
-                    title: 'Fehler',
-                    text: 'Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.'
-                }
+        function showError(code) {
+            var texts = {
+                'invalid_email': el.dataset.errInvalidEmail,
+                'mail_failed':   el.dataset.errMailFailed,
+                'network':       el.dataset.errNetwork,
+                'unknown':       el.dataset.errUnknown
             };
-
-            var msg = messages[code] || messages['unknown'];
-            errorTitle.textContent = msg.title;
-            errorText.textContent = message || msg.text;
+            errorTitle.textContent = el.dataset.msgError;
+            errorText.textContent = texts[code] || texts['unknown'];
             errorMsg.style.display = 'block';
         }
     });

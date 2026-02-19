@@ -4,71 +4,92 @@
 <f:layout name="Default" />
 
 <f:section name="Main">
+    <f:asset.script identifier="leadmagnet-js" src="EXT:leadmagnet/Resources/Public/JavaScript/leadmagnet.js" defer="1" />
     <f:variable name="btnColor">{f:if(condition: settings.buttonColor, then: settings.buttonColor, else: 'primary')}</f:variable>
 
-    <div class="leadmagnet-element" data-leadmagnet-uid="{uid}" data-leadmagnet-type="{settings.typeNum}">
-        <f:if condition="{data.bodytext}">
-            <div class="leadmagnet-description mb-3">
-                <f:format.html>{data.bodytext}</f:format.html>
-            </div>
+    <div class="leadmagnet-element"
+         data-leadmagnet-uid="{uid}"
+         data-leadmagnet-type="{settings.typeNum}"
+         data-msg-success="{f:translate(key: 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.success')}"
+         data-msg-already-registered="{f:translate(key: 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.already_registered')}"
+         data-msg-error="{f:translate(key: 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.error')}"
+         data-err-invalid-email="{f:translate(key: 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.error.invalid_email')}"
+         data-err-mail-failed="{f:translate(key: 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.error.mail_failed')}"
+         data-err-network="{f:translate(key: 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.error.network')}"
+         data-err-unknown="{f:translate(key: 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.error.unknown')}">
+    <f:if condition="{data.bodytext}">
+        <div class="leadmagnet-description mb-3">
+            <f:format.html>{data.bodytext}</f:format.html>
+        </div>
+    </f:if>
+
+    <button type="button"
+            class="btn btn-lg btn-{btnColor} leadmagnet-toggle-btn"
+            data-bs-toggle="collapse"
+            data-bs-target="#leadmagnet-collapse-{uid}"
+            aria-expanded="false"
+            aria-controls="leadmagnet-collapse-{uid}">
+        <f:if condition="{settings.buttonTitle}">
+            <f:then>{settings.buttonTitle}</f:then>
+            <f:else>Download</f:else>
         </f:if>
+    </button>
 
-        <button type="button"
-                class="btn btn-lg btn-{btnColor} leadmagnet-toggle-btn"
-                data-bs-toggle="collapse"
-                data-bs-target="#leadmagnet-collapse-{uid}"
-                aria-expanded="false"
-                aria-controls="leadmagnet-collapse-{uid}">
-            <f:if condition="{settings.buttonTitle}">
-                <f:then>{settings.buttonTitle}</f:then>
-                <f:else>Download</f:else>
-            </f:if>
-        </button>
-
-        <div class="collapse mt-3" id="leadmagnet-collapse-{uid}">
-            <div class="card card-body border-0 p-0" style="max-width: 480px;">
-                <form class="leadmagnet-form" novalidate="novalidate">
-                    <input type="hidden" name="contentElementUid" value="{uid}" />
-                    <label for="leadmagnet-email-{uid}" class="form-label small text-muted">E-Mail-Adresse</label>
-                    <div class="input-group">
-                        <input type="email"
-                               class="form-control"
-                               id="leadmagnet-email-{uid}"
-                               name="email"
-                               required="required"
-                               placeholder="ihre@email.de" />
-                        <div class="d-none">
-                            <input type="text" name="sweets" value="" tabindex="-1" autocomplete="off" />
-                        </div>
-                        <button type="submit" class="btn btn-{btnColor}">
-                            Jetzt herunterladen
-                        </button>
-                    </div>
-                    <div class="invalid-feedback">Bitte geben Sie eine gültige E-Mail-Adresse ein.</div>
-                </form>
-
-                <div class="leadmagnet-spinner mt-3" style="display: none;">
-                    <div class="d-flex align-items-center gap-2">
-                        <div class="spinner-border spinner-border-sm text-{btnColor}" role="status">
-                            <span class="visually-hidden">Laden...</span>
-                        </div>
-                        <small class="text-muted">E-Mail wird gesendet...</small>
+    <div class="collapse mt-3" id="leadmagnet-collapse-{uid}">
+        <div class="card card-body border-0 p-0" style="max-width: 480px;">
+            <form class="leadmagnet-form" novalidate="novalidate">
+                <input type="hidden" name="contentElementUid" value="{uid}" />
+                <label for="leadmagnet-email-{uid}" class="form-label small text-muted"><f:translate key="LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.email" /></label>
+                <div class="input-group">
+                    <input type="email"
+                           class="form-control"
+                           id="leadmagnet-email-{uid}"
+                           name="email"
+                           required="required"
+                           placeholder="ihre@email.de" />
+                    <div class="d-none">
+                        <input type="text" name="sweets" value="" tabindex="-1" autocomplete="off" />
                     </div>
                 </div>
+                <div class="invalid-feedback"><f:translate key="LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.email.invalid" /></div>
 
-                <div class="leadmagnet-success alert alert-success mt-3 mb-0" style="display: none;">
-                    Vielen Dank! Sie erhalten in Kürze eine E-Mail mit dem Download-Link.
+                <div class="form-check mt-3">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           id="leadmagnet-newsletter-{uid}"
+                           name="newsletter"
+                           value="1" />
+                    <label class="form-check-label" for="leadmagnet-newsletter-{uid}">
+                        <f:translate key="LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.newsletter" />
+                    </label>
                 </div>
 
-                <div class="leadmagnet-error alert alert-danger mt-3 mb-0" style="display: none;">
-                    <strong class="leadmagnet-error-title">Fehler</strong>
-                    <span class="leadmagnet-error-text"></span>
+                <p class="mt-3 mb-2 small text-muted"><f:translate key="LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.consent" /></p>
+
+                <button type="submit" class="btn btn-{btnColor}">
+                    <f:translate key="LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.submit" />
+                </button>
+            </form>
+
+            <div class="leadmagnet-spinner mt-3" style="display: none;">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="spinner-border spinner-border-sm text-{btnColor}" role="status">
+                        <span class="visually-hidden"><f:translate key="LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.loading" /></span>
+                    </div>
+                    <small class="text-muted"><f:translate key="LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:form.sending" /></small>
                 </div>
+            </div>
+
+            <div class="leadmagnet-success alert alert-success mt-3 mb-0" style="display: none;"></div>
+
+            <div class="leadmagnet-error alert alert-danger mt-3 mb-0" style="display: none;">
+                <strong class="leadmagnet-error-title"></strong>
+                <span class="leadmagnet-error-text"></span>
             </div>
         </div>
     </div>
+</div>
 
-    <f:asset.script identifier="leadmagnet-js" src="EXT:leadmagnet/Resources/Public/JavaScript/leadmagnet.js" defer="1" />
 </f:section>
 
 </html>

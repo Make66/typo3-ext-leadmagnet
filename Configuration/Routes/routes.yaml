@@ -1,0 +1,11 @@
+routeEnhancers:
+  LeadmagnetDownload:
+    type: Extbase
+    extension: Leadmagnet
+    plugin: Show
+    routes:
+      - routePath: '/download/{token}'
+        _controller: 'Leadmagnet::download'
+        _arguments:
+          token: token
+    defaultController: 'Leadmagnet::show'

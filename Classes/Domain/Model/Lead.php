@@ -18,6 +18,8 @@ class Lead extends AbstractEntity
 
     protected bool $downloaded = false;
 
+    protected bool $newsletter = false;
+
     public function getCrdate(): int
     {
         return $this->crdate;
@@ -66,5 +68,15 @@ class Lead extends AbstractEntity
     public function setDownloaded(bool $downloaded): void
     {
         $this->downloaded = $downloaded;
+    }
+
+    public function isNewsletter(): bool
+    {
+        return $this->newsletter;
+    }
+
+    public function setNewsletter(bool $newsletter): void
+    {
+        $this->newsletter = $newsletter;
     }
 }

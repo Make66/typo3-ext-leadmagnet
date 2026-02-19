@@ -51,6 +51,82 @@
 				<source>Downloaded</source>
 				<target>Heruntergeladen</target>
 			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.crdate">
+				<source>Created</source>
+				<target>Erstellt am</target>
+			</trans-unit>
+			<trans-unit id="tx_leadmagnet_lead.newsletter">
+				<source>Newsletter</source>
+				<target>Newsletter</target>
+			</trans-unit>
+			<trans-unit id="form.email">
+				<source>Email address</source>
+				<target>E-Mail-Adresse</target>
+			</trans-unit>
+			<trans-unit id="form.email.invalid">
+				<source>Please enter a valid email address.</source>
+				<target>Bitte geben Sie eine gültige E-Mail-Adresse ein.</target>
+			</trans-unit>
+			<trans-unit id="form.newsletter">
+				<source>Newsletter registration</source>
+				<target>Newsletter Anmeldung</target>
+			</trans-unit>
+			<trans-unit id="form.consent">
+				<source>By providing my email address I agree to receive emails from Coach-2-Coach.de.</source>
+				<target>Mit dem Bereitstellen meiner E-Mail Adresse stimme ich zu, E-Mails von Coach-2-Coach.de zu erhalten.</target>
+			</trans-unit>
+			<trans-unit id="form.submit">
+				<source>Download now</source>
+				<target>Jetzt herunterladen</target>
+			</trans-unit>
+			<trans-unit id="form.sending">
+				<source>Sending email...</source>
+				<target>E-Mail wird gesendet...</target>
+			</trans-unit>
+			<trans-unit id="form.loading">
+				<source>Loading...</source>
+				<target>Laden...</target>
+			</trans-unit>
+			<trans-unit id="form.success">
+				<source>Thank you! You will receive an email with your download link shortly.</source>
+				<target>Vielen Dank! Sie erhalten in Kürze eine E-Mail mit dem Download-Link.</target>
+			</trans-unit>
+			<trans-unit id="form.already_registered">
+				<source>This email address is already registered. Please check your inbox.</source>
+				<target>Diese E-Mail-Adresse ist bereits registriert. Bitte prüfen Sie Ihr Postfach.</target>
+			</trans-unit>
+			<trans-unit id="form.error">
+				<source>Error</source>
+				<target>Fehler</target>
+			</trans-unit>
+			<trans-unit id="form.error.invalid_email">
+				<source>Please check your email address and try again.</source>
+				<target>Bitte überprüfen Sie Ihre E-Mail-Adresse und versuchen Sie es erneut.</target>
+			</trans-unit>
+			<trans-unit id="form.error.mail_failed">
+				<source>The email could not be sent. Please try again in a few minutes.</source>
+				<target>Die E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es in einigen Minuten erneut.</target>
+			</trans-unit>
+			<trans-unit id="form.error.network">
+				<source>The server could not be reached. Please check your internet connection and try again.</source>
+				<target>Der Server konnte nicht erreicht werden. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</target>
+			</trans-unit>
+			<trans-unit id="form.error.unknown">
+				<source>An unexpected error occurred. Please try again later.</source>
+				<target>Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.</target>
+			</trans-unit>
+			<trans-unit id="download.error.invalid_token">
+				<source>The download link is invalid.</source>
+				<target>Der Download-Link ist ungültig.</target>
+			</trans-unit>
+			<trans-unit id="download.error.expired">
+				<source>The download link has expired. Please request a new one by submitting the form again.</source>
+				<target>Der Download-Link ist abgelaufen. Bitte fordern Sie einen neuen an, indem Sie das Formular erneut ausfüllen.</target>
+			</trans-unit>
+			<trans-unit id="download.error.file_not_found">
+				<source>The file could not be found.</source>
+				<target>Die Datei konnte nicht gefunden werden.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

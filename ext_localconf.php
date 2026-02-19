@@ -11,8 +11,9 @@ ExtensionUtility::configurePlugin(
     'Leadmagnet',
     'Show',
     [LeadmagnetController::class => 'show,submit,download'],
-    [LeadmagnetController::class => 'submit,download'],
+    [LeadmagnetController::class => 'show,submit,download'],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 
+$GLOBALS['TYPO3_CONF_VARS']['MAIL']['layoutRootPaths'][419] = 'EXT:leadmagnet/Resources/Private/Layouts';
 $GLOBALS['TYPO3_CONF_VARS']['MAIL']['templateRootPaths'][419] = 'EXT:leadmagnet/Resources/Private/Templates/Mail';

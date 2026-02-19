@@ -15,7 +15,7 @@ return [
     ],
     'types' => [
         '0' => [
-            'showitem' => 'email,token,content_element,downloaded',
+            'showitem' => 'email,token,content_element,crdate,downloaded,newsletter',
         ],
     ],
     'columns' => [
@@ -41,8 +41,23 @@ return [
                 'type' => 'number',
             ],
         ],
+        'crdate' => [
+            'label' => 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:tx_leadmagnet_lead.crdate',
+            'config' => [
+                'type' => 'datetime',
+                'format' => 'datetime',
+                'readOnly' => true,
+            ],
+        ],
         'downloaded' => [
             'label' => 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:tx_leadmagnet_lead.downloaded',
+            'config' => [
+                'type' => 'check',
+                'readOnly' => true,
+            ],
+        ],
+        'newsletter' => [
+            'label' => 'LLL:EXT:leadmagnet/Resources/Private/Language/locallang.xlf:tx_leadmagnet_lead.newsletter',
             'config' => [
                 'type' => 'check',
                 'readOnly' => true,

@@ -1,0 +1,67 @@
+name: typo3-ext-coaches deploy-to-stage
+run-name: ${{ github.actor }} deploys a push to stage
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (nur für evtl. Build-Schritte)
+        uses: actions/checkout@v5
+
+      - name: Known Hosts konfigurieren
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H -p "${{ vars.SSH_PORT }}" "${{ vars.SSH_HOST_STAGE }}" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Remote Deployment ausführen
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.SSH_HOST_STAGE }}
+          username: ${{ vars.SSH_USER }}
+          port: ${{ vars.SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          request_pty: true
+          script: |
+            # YOUR ORIGINAL SCRIPT - NO bash -i wrapper needed
+            set -euo pipefail
+            REPO_SSH_URL="${{ vars.REPO_SSH_URL }}"
+
+            log_error() {
+              echo "ERROR: $*" >&2
+              if [ -n "${GITHUB_ACTIONS:-}" ]; then echo "::error::$*"; fi
+            }
+
+            ensure_repo() {
+              local path="$1"
+              if [ ! -d "$path" ]; then
+                log_error "ERROR: Directory '$path' does not exist or cannot be read by user ${{ vars.SSH_USER }}."
+                exit 1
+              fi
+              cd "$path"  # ✅ Works with PTY
+              if [ ! -d ".git" ]; then
+                log_error "No .git directory in '$path' or cannot be read by user ${{ vars.SSH_USER }}"
+                exit 1
+              fi
+              git remote set-url origin "$REPO_SSH_URL"
+              git pull origin main
+            }
+
+            run_typo3_tasks() {
+              local base="$1"
+              cd "$base"
+              vendor/bin/typo3 cache:flush
+              vendor/bin/typo3 extension:setup
+              composer dump-autoload
+            }
+
+            # SSH Deploy Key setup
+            eval $(ssh-agent -s)
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
+
+            # Pull to path: Members page
+            echo "=== deploy to Members Page ==="
+            ensure_repo "${{ vars.REPO_PATH }}"
+            run_typo3_tasks "${{ vars.BASE_PATH }}"
