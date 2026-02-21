@@ -65,7 +65,7 @@
 			</trans-unit>
 			<trans-unit id="form.email.invalid">
 				<source>Please enter a valid email address.</source>
-				<target>Bitte geben Sie eine gültige E-Mail-Adresse ein.</target>
+				<target>Bitte geben eine gültige E-Mail-Adresse ein.</target>
 			</trans-unit>
 			<trans-unit id="form.newsletter">
 				<source>Newsletter registration</source>
@@ -89,11 +89,11 @@
 			</trans-unit>
 			<trans-unit id="form.success">
 				<source>Thank you! You will receive an email with your download link shortly.</source>
-				<target>Vielen Dank! Sie erhalten in Kürze eine E-Mail mit dem Download-Link.</target>
+				<target>Vielen Dank! Du erhälst in Kürze eine E-Mail mit dem Download-Link.</target>
 			</trans-unit>
 			<trans-unit id="form.already_registered">
 				<source>This email address is already registered. Please check your inbox.</source>
-				<target>Diese E-Mail-Adresse ist bereits registriert. Bitte prüfen Sie Ihr Postfach.</target>
+				<target>Diese E-Mail-Adresse ist bereits registriert. Bitte prüfe Dein Postfach.</target>
 			</trans-unit>
 			<trans-unit id="form.error">
 				<source>Error</source>
@@ -101,19 +101,19 @@
 			</trans-unit>
 			<trans-unit id="form.error.invalid_email">
 				<source>Please check your email address and try again.</source>
-				<target>Bitte überprüfen Sie Ihre E-Mail-Adresse und versuchen Sie es erneut.</target>
+				<target>Bitte überprüfe Deine E-Mail-Adresse und versuchen es erneut.</target>
 			</trans-unit>
 			<trans-unit id="form.error.mail_failed">
 				<source>The email could not be sent. Please try again in a few minutes.</source>
-				<target>Die E-Mail konnte nicht gesendet werden. Bitte versuchen Sie es in einigen Minuten erneut.</target>
+				<target>Die E-Mail konnte nicht gesendet werden. Bitte versuche es in einigen Minuten erneut.</target>
 			</trans-unit>
 			<trans-unit id="form.error.network">
 				<source>The server could not be reached. Please check your internet connection and try again.</source>
-				<target>Der Server konnte nicht erreicht werden. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</target>
+				<target>Der Server konnte nicht erreicht werden. Bitte prüfen Deine Internetverbindung und versuche es erneut.</target>
 			</trans-unit>
 			<trans-unit id="form.error.unknown">
 				<source>An unexpected error occurred. Please try again later.</source>
-				<target>Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.</target>
+				<target>Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.</target>
 			</trans-unit>
 			<trans-unit id="download.error.invalid_token">
 				<source>The download link is invalid.</source>
@@ -121,7 +121,7 @@
 			</trans-unit>
 			<trans-unit id="download.error.expired">
 				<source>The download link has expired. Please request a new one by submitting the form again.</source>
-				<target>Der Download-Link ist abgelaufen. Bitte fordern Sie einen neuen an, indem Sie das Formular erneut ausfüllen.</target>
+				<target>Der Download-Link ist abgelaufen. Bitte fordere einen neuen an, indem Du das Formular erneut ausfüllst.</target>
 			</trans-unit>
 			<trans-unit id="download.error.file_not_found">
 				<source>The file could not be found.</source>
