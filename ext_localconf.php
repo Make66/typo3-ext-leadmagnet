@@ -15,5 +15,5 @@ ExtensionUtility::configurePlugin(
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 
-$GLOBALS['TYPO3_CONF_VARS']['MAIL']['layoutRootPaths'][419] = 'EXT:leadmagnet/Resources/Private/Layouts';
+$GLOBALS['TYPO3_CONF_VARS']['MAIL']['layoutRootPaths'][419] = 'EXT:leadmagnet/Resources/Private/Layouts/Mail';
 $GLOBALS['TYPO3_CONF_VARS']['MAIL']['templateRootPaths'][419] = 'EXT:leadmagnet/Resources/Private/Templates/Mail';
