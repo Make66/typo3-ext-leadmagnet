@@ -8,6 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Mime\Address;
 use Taketool\Leadmagnet\Domain\Model\Lead;
 use Taketool\Leadmagnet\Domain\Repository\LeadRepository;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
@@ -28,6 +29,7 @@ class LeadmagnetController extends ActionController
         private readonly PersistenceManagerInterface $persistenceManager,
         private readonly ConnectionPool $connectionPool,
         private readonly ResourceFactory $resourceFactory,
+        private readonly ExtensionConfiguration $extensionConfiguration,
     ) {}
 
     public function showAction(): ResponseInterface
@@ -128,6 +130,10 @@ class LeadmagnetController extends ActionController
                     'downloadLink' => $downloadLink,
                     'email' => $email,
                 ]);
+            $adminEmail = (string)($this->extensionConfiguration->get('leadmagnet', 'adminEmail') ?? '');
+            if ($adminEmail !== '' && filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+                $fluidEmail->bcc(new Address($adminEmail));
+            }
             GeneralUtility::makeInstance(MailerInterface::class)->send($fluidEmail);
         } catch (\Exception $e) {
             error_log('Leadmagnet mail error [' . get_class($e) . ']: ' . $e->getMessage());

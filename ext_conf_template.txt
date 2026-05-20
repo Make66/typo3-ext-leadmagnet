@@ -1,0 +1,2 @@
+# cat=basic/email/10; type=string; label=Admin Email (receives a BCC of each registration email)
+adminEmail =
