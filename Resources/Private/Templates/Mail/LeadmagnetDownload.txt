@@ -2,11 +2,11 @@
 <f:section name="Subject">Dein Download-Link</f:section>
 <f:section name="Title">Dein Download ist bereit</f:section>
 <f:section name="Main">
-Hallo,
+Hallo {firstname},
 
 vielen Dank für Dein Interesse!
 
-Klicken auf den folgenden Link, um Deine Datei herunterzuladen:
+Klicke auf den folgenden Link, um Deine Datei herunterzuladen:
 
 {downloadLink}
 

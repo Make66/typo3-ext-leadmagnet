@@ -46,6 +46,8 @@ class LeadmagnetController extends ActionController
     {
         $arguments = $this->request->getArguments();
         $email = trim((string)($arguments['email'] ?? ''));
+        $firstname = trim((string)($arguments['firstname'] ?? ''));
+        $lastname = trim((string)($arguments['lastname'] ?? ''));
         $contentElementUid = (int)($arguments['contentElementUid'] ?? 0);
         $newsletter = (bool)($arguments['newsletter'] ?? false);
 
@@ -129,6 +131,8 @@ class LeadmagnetController extends ActionController
                 ->assignMultiple([
                     'downloadLink' => $downloadLink,
                     'email' => $email,
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
                 ]);
             $adminEmail = (string)($this->extensionConfiguration->get('leadmagnet', 'adminEmail') ?? '');
             if ($adminEmail !== '' && filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
